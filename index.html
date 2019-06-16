@@ -5,9 +5,35 @@
     <title>QRscan</title>
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <!--script type="text/javascript" src="instascan.min.js"></script-->
+    <style type="text/css">
+      * {
+        max-width:1200px;
+        margin-left:auto;
+        margin-right:auto;	
+      }
+
+      textarea {
+        display:block;
+            width: 95%;
+        box-sizing: border-box;
+        border: 1px solid #E1E100;
+        background: #F5FFFA;
+          margin-left:auto;
+         margin-right:auto;
+      }
+      .tops{
+	      float:right;
+      }
+      </style>
   </head>
   <body>
     <video id="preview"></video>
+    <textarea  id="text" rows="8" cols=""></textarea>
+    <div class="tops">
+    	<input onclick="blank()" value="清除" type="button">
+	  <input value="複製" onclick="document.getElementById('text').focus();document.getElementById('text').select();document.execCommand('copy')" type="button">
+	</div>
+     
     <script type="text/javascript">
       function utf8to16(str) {
           var out, i, len, c;
@@ -45,7 +71,8 @@
       
       let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
       scanner.addListener('scan', function (content) {
-        console.log(utf8to16(content));
+        //console.log(utf8to16(content));
+        document.getElementById('text').val( utf8to16(content) );
       });
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
