@@ -15,8 +15,8 @@
 	}
       #preview {
 	width: 100%;
-	max-width:640px;
-	max-height:300px;   
+	max-width:400px;
+	max-height:400px;   
       }	    
       textarea {
         width: 85%;
@@ -75,7 +75,7 @@
           return out;
       }
       
-      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') ,mirror: false,});
       scanner.addListener('scan', function (content) {
         //console.log(utf8to16(content));
         document.getElementById('text').value = utf8to16(content);
